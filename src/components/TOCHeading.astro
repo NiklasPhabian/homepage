@@ -1,0 +1,34 @@
+---
+const { heading } = Astro.props;
+---
+
+
+<li class="tocli">
+  <a href={'#' + heading.slug}> {heading.text} </a>
+    {heading.subheadings.length > 0 && (
+        <ol class="toc"> {heading.subheadings.map((subheading) => (<Astro.self heading={subheading} />))} </ol>
+        )
+    }
+</li>
+
+
+<style>
+.toc {        
+        counter-reset: item;
+        padding: 0;        
+      }
+      li {
+        display: table;
+        counter-increment: item;
+        
+      }
+      li:before {
+        content: counters(item, ".") ". ";
+        display: table-cell;
+        padding-right: 0.6em;
+      }      
+      li li:before {
+        content: counters(item, ".") " ";
+      }
+}
+</style>

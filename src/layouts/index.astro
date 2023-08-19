@@ -1,0 +1,31 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+
+import Config from '../../astro.config.mjs'
+const origin = Astro.site.url
+
+const { content } = Astro.props;
+const { headings } = Astro.props;
+console.log(Astro.props)
+---
+
+<!DOCTYPE html>
+<html class="theme-sleek" lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="min-h-screen max-w-3xl mx-auto px-6 sm:px-8">  	
+		<Header title={SITE_TITLE} />
+		<main id="main">
+			<slot/>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+

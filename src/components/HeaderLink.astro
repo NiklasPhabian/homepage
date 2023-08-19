@@ -6,8 +6,8 @@ type Props = HTMLAttributes<'a'>;
 const { href, class: className, ...props } = Astro.props;
 const { pathname } = Astro.url;
 
-import Config from '../../astro.config.mjs'
-const base = Config.base
+// import Config from '../../astro.config.mjs'
+const base = 'homepage/' //Config.base
 
 
 const isActive = href === pathname || href === pathname.replace(/\/$/, '').replace('/', '').replace(base, '');

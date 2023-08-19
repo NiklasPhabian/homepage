@@ -72,7 +72,7 @@ h5 {
 	font-size: 1em;
 }
 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a  {
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     text-decoration:none;
     color:#000;
 }
@@ -96,9 +96,6 @@ a:not(.unset) {
     linear-gradient(to right, theme('colors.text.link'), theme('colors.text.link'));
 }
 
-a:not(.unset):hover {
-	color: theme('colors.text.link');
-}
 p {
 	margin-bottom: 1em;
 }

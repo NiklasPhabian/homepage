@@ -3,15 +3,10 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-
-
-import Config from '../../astro.config.mjs'
-const origin = Astro.site.url
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 
 const { content } = Astro.props;
 const { headings } = Astro.props;
-console.log(Astro.props)
 ---
 
 <!DOCTYPE html>

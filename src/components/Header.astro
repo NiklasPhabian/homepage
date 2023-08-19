@@ -1,19 +1,17 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
-import { GITHUB } from '../consts';
-
-import Config from '../../astro.config.mjs'
-const base = Config.base
+import { SITE_TITLE } from '../config';
+import { GITHUB } from '../config';
+import { BASE } from '../config';
 ---
 
 <header>
 	<nav>
-		<h2><a href={""}>{SITE_TITLE}</a></h2>
+		<h2><a href={BASE}>{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink href={base }>Home</HeaderLink>
-			<HeaderLink href={base + "blog/"}>Blog</HeaderLink>
-			<HeaderLink href={base + "about"}>About</HeaderLink>
+			<HeaderLink href={BASE}>Home</HeaderLink>
+			<HeaderLink href={BASE + "blog/"}>Blog</HeaderLink>
+			<HeaderLink href={BASE + "about"}>About</HeaderLink>
 		</div>
 		<div class="social-links">
 			<a href={GITHUB} target="_blank">
@@ -38,8 +36,6 @@ const base = Config.base
 		margin: 0;
 		font-size: 1em;
 	}
-
-	h2 a,
 	h2 a.active {
 		text-decoration: none;
 	}
@@ -58,7 +54,6 @@ const base = Config.base
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
-	.social-links,
 	.social-links a {
 		display: flex;
 	}

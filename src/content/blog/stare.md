@@ -1,7 +1,5 @@
 ---
-external: false
-draft: false
-title: STARE
+title: STARE - A unifying global geospatial representation method
 description: The Spatiotemporal Resolution Encoding
 date: 2019-08-21
 ---
@@ -24,6 +22,5 @@ methods and storage backends for STARE indexed data.
 - https://github.com/SpatioTemporal/pystare
 - https://github.com/SpatioTemporal/STAREMaster_py
 - https://github.com/SpatioTemporal/STAREPods_py
-
-
 - https://github.com/NiklasPhabian/mod2htm
+

@@ -1,8 +1,6 @@
 ---
-external: false
-draft: false
 title: Adding disks to VPC
-description: pg
+description: How to attach discs to a cloud VPC
 date: 2017-01-17
 ---
 

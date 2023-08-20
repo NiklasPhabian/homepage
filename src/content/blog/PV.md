@@ -4,5 +4,5 @@ description: Some notes on my mini PV system
 date: 2022-12-08
 ---
 
-- [post on orienting a solar panel](https://rodent.club/orienting-a-solar-panel)
+- [Matthew Varble's post on orienting a solar panel](https://rodent.club/orienting-a-solar-panel)
 - https://github.com/NiklasPhabian/holyromanpv 

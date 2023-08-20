@@ -1,9 +1,8 @@
 ---
-external: false
-draft: false
-title: Zero-To-PostGIS for OSM data
-description: How to setup a PostGIS server to host and serve OpenStreetMap Data
+title: Zero to PostGIS
+description: How to setup a PostGIS server 
 date: 2019-08-21
+tags: GIS
 ---
 
 These are some notes I wrote for a colleague to setup a postgis server to store some OSM data.
@@ -124,32 +123,4 @@ sudo -u postgres psql -d osm -c "CREATE EXTENSION hstore;"
 sudo -u postgres psql -d osm -c "GRANT CONNECT ON DATABASE osm TO osm_read;"
 sudo -u postgres psql -d osm -c "ALTER DEFAULT PRIVILEGES GRANT SELECT ON TABLES TO osm_read;"
 ```
-
-## Download the data
-Get a subsetted pgf database dump from e.g. https://download.geofabrik.de/.
-
-```bash
-wget https://download.geofabrik.de/north-america/us-latest.osm.pbf
-```
-
-## Install osm2pgsql
-```bash
-sudo apt install osm2pgsql
-```
-
-## Load the pgf
-```bash
-sudo -u postgres env "PATH=$PATH" osm2pgsql \
-        --create \
-        --database osm \
-        --input-reader pbf \        
-        --slim \
-        --cache 3000 \
-        --number-processes 4 \
-        --disable-parallel-indexing \
-        --drop \
-        us-latest.osm.pbf
-```
-
-the cache and number-processes will have to be adjusted according to the server. More information [here](load_pbf).
 

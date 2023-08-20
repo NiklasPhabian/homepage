@@ -1,9 +1,8 @@
 ---
-external: false
-draft: false
 title: Importing OSM PGF to PostGIS
 description: pg
 date: 2019-08-21
+tags: GIS, postgis
 ---
 
 A guide on how to load a PGF OSM dump (e.g. from [geofabrik](https://www.geofabrik.de/) or [planet.openstreetmap.org](https://planet.openstreetmap.org/) to a PostGIS database:

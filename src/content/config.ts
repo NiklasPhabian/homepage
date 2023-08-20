@@ -12,7 +12,7 @@ const blogCollection = defineCollection({
 			.or(z.date())
 			.transform((val) => new Date(val)),		
 		heroImage: z.string().optional(),
-		tags: z.string().optional(),					 
+		tags: z.string().optional(),
 	}),
 });
 

@@ -21,7 +21,6 @@ IFS=$(echo -en "\n\b")
 ROOTDIR="/home/griessbaum/album/"
 cd $ROOTDIR
 
-
 REMOVE="(Original Soundtrack) "
 REPLACE_WITH=""
 

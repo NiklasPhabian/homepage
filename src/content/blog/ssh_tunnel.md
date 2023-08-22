@@ -1,7 +1,7 @@
 ---
 title: SSH tunneling
 description: quick ssh tunnel cheat-sheet
-date: 2023-08-19
+date: 2022-08-19
 ---
 
 I keep on forgetting how SSH tunneling works. Here a few reminders/ usecases

@@ -1,7 +1,6 @@
 ---
-external: false
-title: The Littlest JupyterHub
-description: Notes on setting up TLJH
+title: Retrieve SMS via ADB
+description: How to download SMS messages via ADB
 date: 2021-05-12
 --- 
 

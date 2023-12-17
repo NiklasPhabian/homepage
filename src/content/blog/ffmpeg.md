@@ -4,6 +4,8 @@ description: some reminders on ffmpeg
 date: 2023-06-20
 ---
 
+## Image loop gif
+
 ## GPU acceleration
 Very good instructions at [cyberciti](https://www.cyberciti.biz/faq/how-to-install-ffmpeg-with-nvidia-gpu-acceleration-on-linux/)
 I did minor modifications

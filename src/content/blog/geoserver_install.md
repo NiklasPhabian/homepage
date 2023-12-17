@@ -91,6 +91,20 @@ sudo systemctl enable geoserver
 ```
 
 
+### Performance settings
+We might also want to consider changing some performance parameters in `/etc/init.d/geoserver` as described in [container considerations](https://docs.geoserver.org/latest/en/user/production/container.html), e.g. set the min and max heap size with `-Xmx1024M` and `-Xms128m`. [GisExchange discussion on the topic](https://gis.stackexchange.com/questions/10428/avoiding-geoserver-java-out-of-heap-space-error). 
+
+- `-XX:+UseParallelGC`
+- `-Xmx256M`
+- `-Xmx384M`
+
+Then reload the units and restart the server
+
+```bash
+sudo systemctl daemon-reload
+sudo service geoserver restart
+```
+
 
 ### Open Firewall
 If we are in production, we probably only need 443 **and 22**. Don't forget 22 LOL. 
@@ -383,11 +397,6 @@ We might want to allow CORS for acronline to use user/pwd login
 
 `sudo nano /usr/share/geoserver/webapps/geoserver/WEB-INF/web.xml`
 
-## Limit Memory 
 
-https://docs.geoserver.org/latest/en/user/production/container.html
 
--XX:+UseParallelGC
--Xmx256M
--Xmx384M
 

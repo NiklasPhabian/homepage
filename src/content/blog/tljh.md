@@ -1,5 +1,4 @@
 ---
-external: false
 title: The Littlest JupyterHub
 description: Notes on setting up TLJH
 date: 2022-05-04

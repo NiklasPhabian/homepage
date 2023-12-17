@@ -22,3 +22,10 @@ nmap -Pn -p 80 192.168.0.0/16
 
 - `-Pn` : Treat all hosts as online -- skip host discovery
 - `-n/-R`: Never do DNS resolution/Always resolve [default: sometimes]
+
+
+## Ping scan
+```bash
+nmap -sn 192.168.1.0/24
+```
+

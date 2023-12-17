@@ -45,8 +45,9 @@ iozone -e -I -a -s 100M -r 4k -i 0 -i 1 -i 2 [-f /path/to/file]
 | System        | CPU                                       | Score     |
 | :--           | :--                                       | --:       |
 | victoria      | Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz   | 9,997     |
-| deep-throat   | Intel Core i7-4785T @ 2.20GHz 		    | 7,596     |
-| xps 13        | Core i5-7200U                             | 4,621     |
+| DT            | Intel Core i7-4785T @ 2.20GHz 		    | 7,596     |
+| stinkbug      | Intel Core i7-4770 @ 3.40GHz              | 7.275     |
+| xps 13        | Intel Core i5-7200U                       | 4,621     |
 | latitude      | Intel Core i7-620M @ 2.67GHz 	            | 2,741     |
 | skunk		    | Intel Core2 Duo E7300 @ 2.66GHz		    | 1,728     |
 |               | Intel Core2 Duo E8600 @ 3.33GHz	        | 2,412     |

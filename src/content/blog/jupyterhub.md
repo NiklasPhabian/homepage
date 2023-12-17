@@ -24,13 +24,12 @@ echo "deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable 
 sudo apt update
 sudo apt install conda
 sudo /opt/conda/bin/conda update conda
-sudo /opt/conda/bin/conda install -c conda-forge mamba
 sudo ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
 ```
 
 ### nodejs
 ```bash
-sudo /opt/conda/bin/conda install -c conda-forge nodejs 
+sudo /opt/conda/bin/conda install -c conda-forge nodejs npm
 sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable

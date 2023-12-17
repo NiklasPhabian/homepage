@@ -32,9 +32,9 @@ v4l2-ctl -d /dev/video0 --set-ctrl=white_balance_temperature=4700
 
 ## Settings that worked in my homeoffice with a C920
 ```bash
-v4l2-ctl -d /dev/video2 --set-ctrl=white_balance_temperature_auto=0
-v4l2-ctl -d /dev/video2 --set-ctrl=white_balance_temperature=4500
-v4l2-ctl -d /dev/video2 --set-ctrl=saturation=90
-v4l2-ctl -d /dev/video2 --set-ctrl=brightness=120
+v4l2-ctl -d /dev/video0 --set-ctrl=white_balance_temperature_auto=0
+v4l2-ctl -d /dev/video0 --set-ctrl=white_balance_temperature=4500
+v4l2-ctl -d /dev/video0 --set-ctrl=saturation=90
+v4l2-ctl -d /dev/video0 --set-ctrl=brightness=120
 ```
 

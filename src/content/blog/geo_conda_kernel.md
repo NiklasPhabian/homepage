@@ -18,10 +18,9 @@ pip3 cache purge
 conda clean -y --all
 conda update conda
 ENVNAME=stare
-conda create -y -n $ENVNAME python=3.10
+conda create -y -n $ENVNAME python=3.11
 conda activate $ENVNAME
-conda install -y -c conda-forge mamba
-mamba install -y -c conda-forge ipykernel
+conda install -y -c conda-forge ipykernel
 python -m ipykernel install --user --name $ENVNAME --display-name $ENVNAME 
 jupyter kernelspec list
 ```
@@ -49,7 +48,7 @@ sudo /opt/jupyterhub/bin/python3 -m pip install ipympl
 Then in the kernel:
 ```bash
 pip install ipympl
-mamba install -y -c conda-forge ipympl
+conda install -y -c conda-forge ipympl
 ```
 
 Regarding "Error displaying widget: model not found"
@@ -75,7 +74,7 @@ might as well throw the outdated system gdal out
 
 ```bash
 sudo apt remove libgdal-dev gdal-bin
-mamba install -c conda-forge gdal
+conda install -c conda-forge gdal
 ```
 
 I ran into issues with gdal, failing to veriyf popler-data.
@@ -88,9 +87,9 @@ Other attempts
 
 ```bash
 conda clean --packages --tarballs
-mamba remove poppler
-mamba install poppler
-mamba install -f poppler
+conda remove poppler
+conda install poppler
+conda install -f poppler
 ```
 
 ### Cartopy, and proj, rasterio
@@ -104,18 +103,18 @@ pip3 uninstall -y pyproj cartopy rasterio
 ```
 
 ```bash
-mamba install -c conda-forge proj
-mamba install -c conda-forge cartopy
-mamba install -c conda-forge rasterio
-mamba install -c conda-forge pyproj
-mamba install -c conda-forge scipy
-mamba install -c conda-forge rioxarray
-mamba install -c conda-forge contextily
+conda install -c conda-forge proj
+conda install -c conda-forge cartopy
+conda install -c conda-forge rasterio
+conda install -c conda-forge pyproj
+conda install -c conda-forge scipy
+conda install -c conda-forge rioxarray
+conda install -c conda-forge contextily
 ```
 
 or rather:
 ```bash
-mamba install -c conda-forge proj cartopy rasterio pyproj scipy rioxarray contextily geopandas
+conda install -c conda-forge proj cartopy rasterio pyproj scipy rioxarray contextily geopandas
 ```
 
 Installing from pip *appears* to work; but the kernel crashes when using cartopy 
@@ -137,7 +136,7 @@ Careful; If you have installed cartopy from pypi, DON'T install geopandas from c
 It will create a conflict (I think with shapely) and cause a runtime error when importing cartopy
 
 ```bash
-mamba install -y -c conda-forge geopandas
+conda install -y -c conda-forge geopandas
 ```
 
 ```bash
@@ -146,9 +145,9 @@ pip3 install geopandas
 
 ### DB interactions
 ```bash
-mamba install -c conda-forge psycopg2
-mamba install -c conda-forge sqlalchemy
-mamba install -c conda-forge geoalchemy2
+conda install -c conda-forge psycopg2
+conda install -c conda-forge sqlalchemy
+conda install -c conda-forge geoalchemy2
 ```
 
 ```bash
@@ -161,7 +160,7 @@ pip3 install geoalchemy2
 I am not sure if this might conflict with starepandas. Also, there was an issue with 2022.8.0 and starepandas
 
 ```bash
-mamba install -c conda-forge dask
+conda install -c conda-forge dask
 ```
 
 ### STARE

@@ -4,10 +4,11 @@ description: The Spatiotemporal Resolution Encoding
 date: 2019-08-21
 ---
 
+
 Geospatial analysis is predicated on the ability to evaluate geospatial coincidence between geo-
 referenced objects. The sheer volume of remotely sensed data and their irregular spacing are a
-disabling roadblock for scientists, currently only circumventable by spatiotemporal discretiza-
-tion and sampling of observations. While spatial discretization simplifies the evaluation of
+disabling roadblock for scientists, currently only circumventable by spatiotemporal discretization and sampling of observations.
+While spatial discretization simplifies the evaluation of
 geospatial coincidence, it decreases the data fidelity. The alternative geospatial referencing and
 indexing schema, the Spatio-Temporal Adaptive-Resolution Encoding (STARE), built on top
 of a Hierarchical Triangular Mesh (HTM), allows performant spatial coincidence evaluation of

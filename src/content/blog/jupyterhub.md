@@ -29,6 +29,7 @@ sudo ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
 
 ### nodejs
 ```bash
+#sudo apt install npm
 sudo /opt/conda/bin/conda install -c conda-forge nodejs npm
 sudo npm cache clean -f
 sudo npm install -g n

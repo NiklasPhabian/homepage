@@ -17,6 +17,8 @@ audible-quickstart
 audible activation-bytes
 ```
 
+Activation Carol: 43314538
+Activation Niklas: a4a3e627 
 
 ## audible-activator
 Inactive project

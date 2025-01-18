@@ -36,6 +36,13 @@ npx astro add tailwind
 npm install remark-toc
 ```
 
+- https://dev.to/stivncastillo/how-to-implement-toc-in-astro-4k4e
+- https://daily-dev-tips.com/posts/adding-a-toc-in-astro/
+- https://www.omarpg.com/blog/table-of-contents/
+- https://github.com/withastro/docs/blob/882e0b0a9d16d1c822cb8c230a62a4bfcd308605/src/util/generateToc.ts
+- https://kld.dev/building-table-of-contents/
+
+
 ## Adding Header-links
 ```bash
 npm install rehype-autolink-headings
@@ -43,7 +50,7 @@ npm install rehype-slug
 ```
 
 
-## Add mdx support 
+## Add mdx support
 I think this is not elegant; we might want to be able to parse md with e.g. pandoc
 
 ```bash
@@ -58,11 +65,4 @@ npm install @markdoc/markdoc
 ## Render stuff
 `const h = Markdoc.renderers.html(content)`
 
-- https://github.com/withastro/docs/blob/882e0b0a9d16d1c822cb8c230a62a4bfcd308605/src/util/generateToc.ts
-- https://kld.dev/building-table-of-contents/
 
-# Links don't work
-
-- https://dev.to/stivncastillo/how-to-implement-toc-in-astro-4k4e
-- https://daily-dev-tips.com/posts/adding-a-toc-in-astro/
-- https://www.omarpg.com/blog/table-of-contents/

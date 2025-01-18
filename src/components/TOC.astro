@@ -21,8 +21,6 @@ export function generateToc(headings: MarkdownHeading[], title = 'TOC') {
 	//headings = [overview, ...headings.filter(({ depth }) => depth > 1 && depth < 4)];
 	headings = [ ...headings.filter(({ depth }) => depth > 1 && depth < 4)];
 	const toc: Array<TocItem> = [];
-	
-	
 
 	for (const heading of headings) {
 		if (toc.length === 0) {
@@ -73,7 +71,6 @@ function generateToc2(headings) {
 }
 
 const { headings } = Astro.props;
-
 const toc= generateToc(headings);
 
 ---

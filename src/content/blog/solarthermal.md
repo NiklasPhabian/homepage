@@ -1,7 +1,7 @@
 --- 
 title: Domestic Solarthermal Energy
 description: Notes on experiments with a solarthermal energy system for domestic hot water pre-heating
-date: 2023-08-22
+date: 2023-12-29
 ---
 
 
@@ -29,10 +29,51 @@ Considering the Global tilted irradiation at optimum angle of about 6.8 kWh/m/m/
 
 ## Measuring setup
 
-### Flow
+### Flows
 - https://tutorials-raspberrypi.com/reading-out-the-flow-meter-water-flow-sensor-on-the-raspberry-pi/#google_vignette
 - https://www.bentasker.co.uk/posts/blog/house-stuff/monitoring-a-fishtank-with-influxdb-and-grafana.html
 - https://www.amazon.com/dp/B07QQW7JZL?psc=1&ref=ppx_yo2ov_dt_b_product_details
+
+Pins:
+- Red (3.3 V Power): pin 1
+- Black (ground): pin 6
+- Yellow (signal): pin 7; GPIO 4
+
+```python
+#!/usr/bin/python
+import RPi.GPIO as GPIO
+import time, sys
+
+flow_sensor_gpio = 4
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(flow_sensor_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+global count
+count = 0
+
+def countPulse(channel):
+   global count
+   if start_counter == 1:
+      count = count+1
+
+GPIO.add_event_detect(flow_sensor_gpio, GPIO.FALLING, callback=countPulse)
+
+while True:
+    try:
+        start_counter = 1
+        time.sleep(1)
+        start_counter = 0
+        flow = (count / 7.5) # Pulse frequency (Hz) = 7.5Q, Q is flow rate in L/min.
+        print("The flow is: %.3f Liter/min" % (flow))
+        count = 0
+        time.sleep(1)
+    except KeyboardInterrupt:
+        print('\nkeyboard interrupt!')
+        GPIO.cleanup()
+        sys.exit()
+```
+
 
 
 ### Temp
@@ -41,16 +82,48 @@ Considering the Global tilted irradiation at optimum angle of about 6.8 kWh/m/m/
 - https://www.circuitbasics.com/raspberry-pi-ds18b20-temperature-sensor-tutorial/
 
 
+Pins:
+- Red: 5V (pin 2 or pin 4)
+- black: ground (8 or 14)
+- Yellow: Pin 11 (GPIO 17) and Pin 12 (GPIO 18)
 
-
-1. `sudo nano /boot/config.txt`
-`dtoverlay=w1-gpio`
-1. Reboot 
+Not sure if we have to do the following:
 1. `sudo modprobe w1-gpio`
 1. `sudo modprobe w1-therm`
-1. `cd /sys/bus/w1/devices`
-1. `ls`
 
-
-sudo dtoverlay w1-gpio gpiopin=4 pullup=0
+Configuring the One-Wire interface on a Raspberry Pi, using GPIO pin 7 without a pull-up resistor.
+```bash
 sudo dtoverlay w1-gpio gpiopin=17 pullup=0
+sudo dtoverlay w1-gpio gpiopin=18 pullup=0
+sudo dtoverlay w1-gpio gpiopin=27 pullup=0
+```
+
+Make permanent:
+1. `sudo nano /boot/config.txt`
+dtoverlay=w1-gpio,gpiopin=17,pullup=0
+dtoverlay=w1-gpio,gpiopin=18,pullup=0
+dtoverlay=w1-gpio,gpiopin=27,pullup=0
+1. Reboot
+
+
+For my system:
+- GPIO 17: 28-3ce1d44312b4 Flow
+- GPIO 18: 28-3ce1d4438ff7 Return
+- GPIO 17: 28-3ce1d4432b6f Ambient
+
+
+Verify
+```bash
+ls /sys/bus/w1/devices
+```
+
+
+
+## Controller / Relay
+
+# Connecting the pins
+![](https://cdn.sparkfun.com/assets/learn_tutorials/4/2/4/header_pinout.jpg?_gl=1*zblvfp*_ga*MjA5NTU0NDYwNy4xNzAzOTA2MDk3*_ga_T369JS7J9N*MTcwMzkwNjA5Ny4xLjAuMTcwMzkwNjA5Ny42MC4wLjA.)
+
+
+#
+

@@ -63,30 +63,37 @@ sudo raspi-config
 sudo nano /etc/dphys-swapfile 
 CONF_SWAPSIZE=1000
 sudo /etc/init.d/dphys-swapfile stop
-sudo /etc/init.d/dphys-swapfile start
+# sudo /etc/init.d/dphys-swapfile start
 ```
 
 ## WLAN
 
+Easiest through raspbi-conig
+
+
+### Fix mac address:
+
 ```bash
-sudo nano /etc/modprobe.d/8192cu.conf
-options 8192cu rtw_power_mgnt=0 rtw_enusbss=0
-sudo nano /etc/network/interfaces
-
-auto lo
-iface lo inet loopback
-iface eth0 inet dhcp
-
-auto wlan0
-allow-hotplug wlan0
-iface wlan0 inet dhcp
-
-sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
-network={
-    ssid=""
-    psk=""
-}
+sudo nano /etc/dhcpcd.conf
 ```
+Add lines
+```bash
+noarp
+interface wlan0
+static hwaddress ether XX:XX:XX:XX:XX:XX
+```
+
+Maybe, we also need to
+```bash
+sudo nano /etc/NetworkManager/NetworkManager.conf
+```
+
+```bash
+[device]
+wifi.scan-rand-mac-address=no
+```
+
+
 
 
 ## Syncing some folders with unison

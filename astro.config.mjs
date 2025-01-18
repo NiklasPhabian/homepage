@@ -25,6 +25,7 @@ export default defineConfig({
     },
     site: BASE_URL,
     base: "/homepage/",
+    trailingSlash: 'always',
 	integrations: [
 		mdx(), 
 		sitemap(),

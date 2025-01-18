@@ -21,6 +21,7 @@ sudo apt install openjdk-17-jre unzip
 
 VERSION=2.23.2
 USERNAME=griessbaum
+
 wget https://sourceforge.net/projects/geoserver/files/GeoServer/$VERSION/geoserver-$VERSION-bin.zip
 
 sudo mkdir /usr/share/geoserver
@@ -70,7 +71,6 @@ sudo service geoserver status
 
 We can either edit the `/etc/init.d/geoserver`, or create `/etc/default/geoserver`.
 
-
 ```bash
 sudo nano /etc/init.d/geoserver
 ```
@@ -78,7 +78,7 @@ sudo nano /etc/init.d/geoserver
 - `GEOSERVER_HOME=/usr/share/geoserver`
 - `GEOSERVER_DATA_DIR=/usr/share/geoserver/data_dir`
 - `USER=griessbaum` (that's probably not a good idea)
-- `JAVA_HOME=''` (my java lives in `/bin/java`)
+- `JAVA_HOME=''` (this is the prefix; keeping it empty will point it to `/bin/java`)
 
 ```bash
 sudo systemctl daemon-reload
@@ -89,7 +89,6 @@ To make the service start at startup:
 ```bash
 sudo systemctl enable geoserver
 ```
-
 
 ### Performance settings
 We might also want to consider changing some performance parameters in `/etc/init.d/geoserver` as described in [container considerations](https://docs.geoserver.org/latest/en/user/production/container.html), e.g. set the min and max heap size with `-Xmx1024M` and `-Xms128m`. [GisExchange discussion on the topic](https://gis.stackexchange.com/questions/10428/avoiding-geoserver-java-out-of-heap-space-error). 
@@ -105,11 +104,8 @@ sudo systemctl daemon-reload
 sudo service geoserver restart
 ```
 
-
 ### Open Firewall
-If we are in production, we probably only need 443 **and 22**. Don't forget 22 LOL. 
-If the machine is on-premise, maybe we open 8080 or 80?
-
+If we are in production, we probably only need 80, 443 **and 22**.
 
 ```bash
 sudo ufw enable
@@ -118,9 +114,7 @@ sudo ufw allow 22
 sudo ufw status
 ```
 
-
 [Edit security group on AWS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html)
-
 
 ### Wipe the demo data
 - data_dir/workspaces : wipe the dir 
@@ -148,32 +142,9 @@ rm -rf /usr/share/geoserver/data_dir/data/*
 - https://gis.stackexchange.com/questions/306824/geoserver-behind-nginx-web-admin-crashes
 
 ```bash
-ADDRESS='natcapgeoserver.duckdns.org'
+ADDRESS='geoserver.co.ck'
 sudo apt install nginx
 ```
-
-Now let's add an available site to test things out on port 80. 
-
-```bash
-sudo nano /etc/nginx/sites-available/geoserver
-
-server {
-        listen 80;
-        server_name natcapgeoserver.duckdns.org www.natcapgeoserver.duckdns.org;
-}
-```
-
-
-
-Adding the site as an enabled site
-```bash
-sudo ln -s /etc/nginx/sites-available/geoserver /etc/nginx/sites-enabled
-sudo nginx -t
-sudo service nginx reload
-sudo service nginx restart
-```
-
-Site should now be available at https://natcapgeoserver.duckdns.org. 
 
 ### Get SSL certificate
 ```bash
@@ -184,40 +155,39 @@ sudo certbot --nginx certonly
 - Certificate is saved at: `/etc/letsencrypt/live/$ADDRESS/fullchain.pem`
 - Key is saved at:         `/etc/letsencrypt/live/$ADDRESS.duckdns.org/privkey.pem`
 
-now add the certificate info
+
+Have the cert renewed once a week.
+
+```bash
+sudo crontab -e
+17 7 * * * certbot renew --post-hook "systemctl reload nginx"
+```
+
+
+### Configure nginx
+ Create a config file:
+
 ```bash
 sudo nano /etc/nginx/sites-available/geoserver
 ```
 
-### Update nginx
-
 ```
 server {
         listen 80;
-        server_name natcapgeoserver.duckdns.org www.natcapgeoserver.duckdns.org;
-        return 301 https://natcapgeoserver.duckdns.org$request_uri;
+        server_name geoserver.co.ck www.geoserver.co.ck;
+
+        # Redirect http requests to https
+        return 301 https://geoserver.co.ck$request_uri;
 }
 
 server {        
         listen 443 ssl http2;
         listen [::]:443 ssl http2;
 
-        ssl_certificate /etc/letsencrypt/live/natcapgeoserver.duckdns.org/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/natcapgeoserver.duckdns.org/privkey.pem;
+        ssl_certificate /etc/letsencrypt/live/geoserver.co.ck/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/geoserver.co.ck/privkey.pem;
 
-        server_name natcapgeoserver.duckdns.org;
-
-        location = /favicon.ico {
-                access_log off;
-                log_not_found off;}
-
-        location / {
-                proxy_pass http://127.0.0.1:8080/geoserver/;
-                proxy_pass_header Set-Cookie;
-                proxy_set_header Host $host;
-                proxy_set_header X-Forwarded-Proto $scheme;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
+        server_name geoserver.co.ck;
 
         location /geoserver/ {
                 proxy_pass http://127.0.0.1:8080/geoserver/;
@@ -229,42 +199,39 @@ server {
 }
 ```
 
-Test again
+### Enable site and reload
+
 ```bash
+sudo ln -s /etc/nginx/sites-available/geoserver /etc/nginx/sites-enabled
 sudo nginx -t
 sudo service nginx reload
 sudo service nginx restart
 ```
 
-At this point, you should either get to the geoserver (if it is running), or get a 502 bad gateway if it is off.
-
-And have the cert renewed once a week.
-
-```bash
-sudo crontab -e
-17 7 * * * certbot renew --post-hook "systemctl reload nginx"
-```
+Site should now be available at https://geoserver.co.ck/
+and you should either get to the geoserver (if it is running), or get a 502 bad gateway if it is off.
 
 ## Geoserver Settings 
 settings are in `/usr/share/geoserver/data_dir/global.xml`
 
-### Set proxy settings
+#### Set proxy settings
 We won't be able to log in via port 443. We have to change the server's proxy settings first. Kind of a hen-and-egg problem ..
 
-Two solutions: 
+Two solutions. Either:
 - temporarily open port 8080 (aws and local firewall). Not very elegant.
 - [port forwarding](blog/ssh_tunnel); e.g. 
 ```bash 
-ssh -N -L 1234:127.0.0.1:8080 natcapgeoserver.duckdns.org
+ssh -N -L 1234:127.0.0.1:8080 geoserver.co.ck
 ```
- Then navigate to `localhost:1234`.
+Then navigate to `localhost:1234`.
 
 Once logged into the webinterface (`admin`/`geoserver`), go to  `Global` (under `Settings`) 
-- Set `Proxy Base URL` to your address (`natcapgeoserver.duckdns.org`). In previous versions, this might have been called `admin site`.
+- Set `Proxy Base URL` to your address (`geoserver.co.ck`). In previous versions, this might have been called `admin site`.
 - Tick/set `Use headers for Proxy URL` = True.
 
 ### Allow cross-site referencing
-https://dev.to/iamtekson/using-nginx-to-put-geoserver-https-4204
+- https://dev.to/iamtekson/using-nginx-to-put-geoserver-https-4204
+- https://docs.geoserver.org/stable/en/user/security/webadmin/csrf.html
 
 ```bash
 sudo nano /usr/share/geoserver/webapps/geoserver/WEB-INF/web.xml
@@ -275,20 +242,19 @@ Add the following
 ```xml
 <context-param>
         <param-name>GEOSERVER_CSRF_WHITELIST</param-name>
-        <param-value>natcapgeoserver.duckdns.org</param-value>
+        <param-value>geoserver.co.ck</param-value>
 </context-param> 
 ```
 and edit the following
 ```xml
 <context-param>  
         <param-name>PROXY_BASE_URL</param-name>  
-        <param-value>https://natcapgeoserver.duckdns.org/geoserver</param-value>
+        <param-value>https://geoserver.co.ck/geoserver</param-value>
 </context-param>
 ```
 
 Note: If you screw this up, you can try to get back to the webinterface through port 8080
 
-https://docs.geoserver.org/stable/en/user/security/webadmin/csrf.html
 
 ## Security/Production settings
 https://docs.geoserver.org/latest/en/user/production/config.html
@@ -304,7 +270,7 @@ Now that SSL is running, we can tighten up security
 - We might want to disable the web admin IF
 
 ## Not allowing unauthorized requests to geoserver
-- Do not Remove anonymous from Authentication settings
+- Do not remove anonymous from Authentication settings
 - Create new user (e.g. `arconline`)
 - Change layer security; 
     - by default nothing is ticked meaning everyone can do everything

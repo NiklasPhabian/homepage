@@ -1,6 +1,6 @@
 ---
-title: Zero to Geoserver
-description: How to setup geoserver on AWS
+title: Set up wake on lan
+description: just some quick notes
 date: 2024-10-01
 ---
 

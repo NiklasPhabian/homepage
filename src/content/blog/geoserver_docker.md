@@ -77,10 +77,10 @@ server {
 
 
 ## Configure CSRF
-Grab a `web.xml` and move it somewhere appropriate
+Grab a `web.xml` and move it somewhere appropriate. (E.g. [here](/homepage/downloads/web.xml))
 
 ```bash
-wget https://github.com/geoserver/geoserver/blob/main/src/web/app/src/main/webapp/WEB-INF/web.xml
+wget https://niklasphabian.github.io/homepage/downloads/web.xml
 mv web.xml /data/web.xml
 nano /data/web.xml
 ```
@@ -99,7 +99,10 @@ Add/edit:
 ```
 
 ## Run the container:
-Note: It seems like version 2.25.4 through 2.26.1 do NOT work with the netCDF plugin. 2.25.3 is the latest one that does as of 2025-01-18.
+Note: It seems like geoserver version 2.25.4 through 2.26.1 do NOT work with the netCDF plugin.
+2.25.3 is the latest one that does as of 2025-01-18.
+Warning: You wont get an immediate error when using the netCDF plugin with e.g. 2.26.1, however, geoserver WILL NOT be able to read CF-compliant netCDFs.
+
 
 ```bash
 VERSION=2.25.3

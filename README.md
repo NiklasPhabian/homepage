@@ -30,7 +30,8 @@ Need to repopulate the package.json
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.2",
@@ -86,6 +87,12 @@ npm install rehype-slug
 ### Adding math support
 ```bash
 npm install remark-math rehype-mathjax
+```
+
+
+### GH-style
+```bash
+npm install github-markdown-css
 ```
 
 

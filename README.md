@@ -1,7 +1,6 @@
 # SRC for Niklas Griessbaum's homepage
 
-Page is based on 
-- [Blogster sleek template](https://blogster-sleek.netlify.app) by [Dinesh Pandiyan](https://github.com/flexdinesh)
+Page is based on [Blogster sleek template](https://blogster-sleek.netlify.app) by [Dinesh Pandiyan](https://github.com/flexdinesh)
 
 
 ## Build locally
@@ -11,27 +10,62 @@ npm run astro dev
 ```
 
 
+## From scratch
+### Purge
+```bash
+rm -r node_modules
+rm package-lock.json
+rm package.json
+```
+
+### Make a package.json
+Need to repopulate the package.json
+```json
+{
+  "name": "homepage",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.2.2",
+    "@astrojs/sitemap": "^3.3.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.5.5",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-katex": "^7.0.1",
+    "rehype-slug": "^6.0.0",
+    "remark-math": "^6.0.0",
+    "remark-toc": "^9.0.0"
+  }
+}
+
+```
+
+### Install Dependencies
+```bash
+npm install astro
+npm install @astrojs/mdx
+npm install @astrojs/sitemap
+npm install @astrojs/tailwind
+npm install remark-toc
+npm install rehype-slug rehype-autolink-headings
+npm install remark-math rehype-katex
+```
+
+
 ## Notes:
 - don't forget to edit `astro.config.mjs` to include a 'base' pointing to the GH pages
 - It seems like all links need to be adapted as well
 
 
-## Getting started
-Official examples:
-
-https://github.com/withastro/astro/tree/main/examples
-
-```bash
-npm create astro@latest -- --template blog
-npm run astro dev
-```
-
-## Add tailwind
-```bash
-npx astro add tailwind
-```
-
-## TOC
+## Customization
+### TOC
 ```bash
 npm install remark-toc
 ```
@@ -43,26 +77,16 @@ npm install remark-toc
 - https://kld.dev/building-table-of-contents/
 
 
-## Adding Header-links
+### Adding Header-links
 ```bash
 npm install rehype-autolink-headings
 npm install rehype-slug
 ```
 
-
-## Add mdx support
-I think this is not elegant; we might want to be able to parse md with e.g. pandoc
-
+### Adding math support
 ```bash
-npx astro add mdx
+npm install remark-math rehype-mathjax
 ```
 
-## makdoc
-```bash
-npm install @markdoc/markdoc
-```
-
-## Render stuff
-`const h = Markdoc.renderers.html(content)`
 
 

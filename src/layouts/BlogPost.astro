@@ -16,6 +16,8 @@ const { title, headings, description, date} = Astro.props;
 <html lang="en">
 	<head>
 		<BaseHead title={title}/>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
 		<style>
 			.prose {
 				width: 960px;				
@@ -55,8 +57,7 @@ const { title, headings, description, date} = Astro.props;
 						<h4>{description}</h4>
 						<FormattedDate date={date} />
 					</div>					
-				
-															
+
 					<TableOfContents headings={headings} />
 					<slot/>
 				</div>

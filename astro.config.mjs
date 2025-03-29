@@ -7,6 +7,9 @@ import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+
 const SERVER_PORT = 3000;
 const LOCALHOST_URL = `http://localhost:${SERVER_PORT}`;
 const LIVE_URL = 'https://niklasphabian.github.io';
@@ -34,17 +37,19 @@ export default defineConfig({
     markdown: {
     // Applied to .md and .mdx files
         remarkPlugins: [
+            remarkMath,
             [remarkToc, {
-              heading: "Contents", 
-              tight: true, 
+              heading: "Contents",
+              tight: true,
               maxDepth: 3,
               //ordered: true,
               skip: 'delta',
               parents: ['root', 'listItem']}]],
     rehypePlugins: [
+      rehypeKatex,
       rehypeSlug, 
       [rehypeAutolinkHeadings, {behavior: 'wrap',content: ''}]
     ],
-    
+
   }
 });

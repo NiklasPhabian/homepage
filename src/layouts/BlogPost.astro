@@ -52,14 +52,12 @@ const { title, headings, description, date} = Astro.props;
 		<Header />
 		<main>
 			<article>
-				
 				<div class="prose">
 					<div class="title">
 						<h1>{title}</h1>
 						<h4>{description}</h4>
 						<FormattedDate date={date} />
-					</div>					
-
+					</div>
 					<TableOfContents headings={headings} />
 					<slot/>
 				</div>

@@ -16,11 +16,12 @@ const { Content, headings } = await post.render();
 ---
 
 <!-- 
-post.data has all attributes of the md frontmatter, i.e. title, headings, description, date ... 
+post.data has all attributes of the md frontmatter, i.e. title, headings, description, date ...
 we could have been explicit with e.g:  <BlogPost title={post.data.title} headings={headings} description={post.data.description}>
 -->
 
-<BlogPost {...post.data} headings={headings} >
+<BlogPost {...post.data} headings={headings}>
 
 	<Content />
+
 </BlogPost>

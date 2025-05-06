@@ -30,7 +30,7 @@ There are also some repositories to
 
 
 ### Scavenging
-I really hate waste and truly believe that nothing is ever really broken. Fixing things and getting a second life out of stuff gives me a huge kick. This e.g. lead me to [convert a 8 USD thrift-store home wifi-router to a eduroam wifi bridge](../blog/eduroam), to [re-stock an old  NAS](../blog/buffalo), and build a scrap server to host OSM planet].
+I really hate waste and truly believe that nothing is ever really broken. Fixing things and getting a second life out of stuff gives me a huge kick. This e.g. lead me to [convert a 8 USD thrift-store home wifi-router to a eduroam wifi bridge](../blog/eduroam), to [re-stock an old  NAS](../blog/buffalo), and build a scrap server to host OSM planet], [repair some active speakers](../blog/audioengine).
 
 ### Energy and efficiency
 This might tie back into my dislike for waste, but domestic energy consumption and efficiency certainly fascinates me. 

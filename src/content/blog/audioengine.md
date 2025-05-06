@@ -20,7 +20,7 @@ In his blog post titled ["Repairing a Pair of Audioengine A5 Speakers"](https://
 
 ![The thermocouple attached to the heatsink](../assets/audioengine/thermocouple.jpg)
 
-Being an electrical engineer, Mathieu did not only understand that the issue was with the "input stage board". He identified a single capacitor being shot, was able to replace it, and fixed his pair of speakers (at a total parts cost in the cent range). For a quick second, I considered doing the same, but with my non-existent electronics knowledge, I had no idea if my speakers even had the same issue (or assess if they did). I also remembered how dick-fingered I was and how unlikely I'd be able to get the capacitor soldered off and on without breaking everything.
+Being an electrical engineer, Mathieu did not only understand that the issue was with the "input stage board". He identified a single capacitor being shot, was able to replace it, and fixed his pair of speakers at a total parts cost in the cent range. For a quick second, I considered doing the same, but with my non-existent electronics knowledge, I had no idea if my speakers even had the same issue (or assess if they did). I also remembered how dick-fingered I was and how unlikely I'd be able to get the capacitor soldered off and on without breaking everything.
 
 ## Diagnosis
 I did not know for sure that for my speakers, the issue was with the preamplifier too, but here was my thought process:
@@ -35,7 +35,7 @@ Missing the knowledge and aptitude to fix the preamplifier, I figured the best w
 ## Picking a preamplifier
 I was confused for quite some time that there were 6 cables going from the preamplifier to the amplifier (two white, two black, two red) while all preamplifiers I saw online obviously only had three outputs (Left, Ground, and Right). Re-reading Limpkins blog, I saw he was confused for a second as well, but figured the second set of three cables were for Ground, Mute, and Standby.
 
-The speaker has no central rectifier and the amplifier and preamplifier boards deal with their own rectification. So that means, I needed an AC-powered preamplifier. The transformer has three outputs; a 12 V tap, an 18 V center-tapped, and a 24 V center-tapped. So I opted for a 12 V to 18 V AC preamplifier.
+The speaker has no central rectifier and the amplifier and preamplifier boards deal with their own rectification. So that means, I needed an AC-powered preamplifier. The transformer has three outputs: a 12 V tap, a 18 V center-tapped, and a 24 V center-tapped output/rail. So I opted for a 12 V to 18 V AC preamplifier.
 
 ![The replacement preamp](../assets/audioengine/preamp.jpg)
 
@@ -43,7 +43,7 @@ The speaker has no central rectifier and the amplifier and preamplifier boards d
 ## Installing the preamplifier
 Hooking up the new preamplifier theoretically was simple, but I was confused about two things:
 
-- Since I had ripped out the connecting cables from the preamplifier, I was not fully sure which set of cables were R, G, L, and which were S, M, G. They were only labeled on the preamp output, not on the amplifier input (always take pictures before ripping apart kids).
+- Since I had ripped out the connecting cables from the preamplifier, I was not fully sure which set of cables were R, G, L, and which were S, M, G. They were only labeled on the preamplifier output, not on the power amplifier input (always take pictures before ripping apart kids).
 - The new preamplifier board said 12 V to 18 V. But it has a center-tapped input. So I wasn't sure if this was supposed to mean 12/18 V to ground or 12/18 V across the two phases. Apparently, it means to ground since it didn't blow up when I connected it to the 18 V rail (with 36 V across).
 
 ![unmarked amplifier inputs](../assets/audioengine/amp_input.jpg)
@@ -52,12 +52,12 @@ Which one is which!?
 ## No output
 Kudos to Limpkin for building the contraption to feed a function generator signal to a 3.5 mm jack. But missing a function generator myself, I used a much simpler setup: a 3.5 mm audio cable connected to the output of my laptop and a YouTube audio/video of a 440 Hz sine wave.
 
-In the meantime, I bought an oscilloscope and could see the signal both at the output of the new preamp and the speaker output. This reassured me that I found which of the 6 cables were R, G, and L.
+In the meantime, I bought an oscilloscope and could see the signal both at the output of the new preamplifier and the power amplifier (/speaker) output. This reassured me that I found which of the 6 cables were R, G, and L.
 However, I had two disappointing observations:
-- The amplitude was lower at the power amplifier output than on the preamplifier output
-- The signal at the speaker output dropped to zero when I connected the speakers
+- The amplitude was lower at the power amplifier output than on the preamplifier output.
+- The signal at the power amplifier (/speaker) output dropped to zero when I connected the speakers.
 
-For a while, I was concerned that actually the power amp was shot (read ... "that I broke it in the process"), but it seemed unlikely that both right and left didn't work. Also, I occasionally produced semi-loud static when I touched the wrong things.
+For a while, I was concerned that actually the power amplifier was shot (read ... "that I broke it in the process"), but it seemed unlikely that both right and left didn't work. Also, I occasionally produced semi-loud static when I touched the wrong things.
 
 ... And then I remembered the mute and standby pins ...
 
